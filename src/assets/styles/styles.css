@@ -1,0 +1,49 @@
+@font-face {
+    font-family: 'digital-font';
+    src: url('../fonts/DS-DIGI.TTF')  format('truetype'),
+         url('../fonts/DS-DIGIB.TTF') format('truetype'),
+         url('../fonts/DS-DIGII.TTF') format('truetype'),
+         url('../fonts/DS-DIGIT.TTF') format('truetype');
+  }
+
+.timer-font {
+    font-family: digital-font;
+    font-size: 75pt;
+}
+
+.timer-font-color {
+    color: white !important;
+}
+
+.header-title {
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.btn-timer-color {
+    color: #C62828 !important;
+}
+
+.shake-animation {
+    animation: shake-frames 5s ease infinite;
+    transform-origin: 80% 80%;
+}
+  
+@keyframes shake-frames{
+    0% { transform:translate(0,0) }
+    1.78571% { transform:translate(5px,0) }
+    3.57143% { transform:translate(0,0) }
+    5.35714% { transform:translate(5px,0) }
+    7.14286% { transform:translate(0,0) }
+    8.92857% { transform:translate(5px,0) }
+    10.71429% { transform:translate(0,0) }
+    100% { transform:translate(0,0) }
+}
+
+.border-card {
+    border: 1px solid red;
+}
+
+.card-text {
+    height: 60%;
+}
