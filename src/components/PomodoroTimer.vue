@@ -68,11 +68,10 @@
         this.dropPendingTask(this.tasks.taskSelected)        
         this.setBreakTime(false)
         if ( this.users.user ) {
-          let dataUpdateTask = {
-            'userName': this.users.user.username,
-            'password': this.users.user.password,
+          let dataUpdateTask = {  
             'taskId': this.tasks.taskSelected.id,
             'body': {
+              'userid': this.users.user.id,
               'number_pomodoro_used': this.timer.numberPomodoros,
               'end_task': true
             }
