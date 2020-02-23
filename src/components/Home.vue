@@ -38,7 +38,7 @@
 
 <script>
 
-import {mapState, mapMutations, mapActions} from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import { required } from "vuelidate/lib/validators"
 import PomodoroTimer from '@/components/PomodoroTimer.vue'
 import TasksSection from '@/components/TasksSection.vue'
@@ -81,22 +81,22 @@ export default {
     }
   },
   computed: {
-    ...mapState(['modals'])
+    ...mapState([ 'modals' ])
   },
   methods: {    
-    ...mapMutations(['setShowModalLogin', 'setShowModalLogup', 'setModalError']),
-    ...mapActions(['login', 'logup', 'logout']),
+    ...mapMutations([ 'setShowModalLogin', 'setShowModalLogup', 'setModalError' ]),
+    ...mapActions([ 'login', 'logup', 'logout' ]),
     handleSubmitLogin() {        
-        this.$v.form.$touch();
-        if (this.$v.form.$invalid) {
-            return;
+        this.$v.form.$touch()
+        if ( this.$v.form.$invalid ) {
+            return
         }        
         this.login(this.form)
     },
     handleSubmitLogup() {        
-        this.$v.formLogup.$touch();
-        if (this.$v.formLogup.$invalid) {
-            return;
+        this.$v.formLogup.$touch()
+        if ( this.$v.formLogup.$invalid ) {
+            return
         }        
         this.logup(this.formLogup)
     }  

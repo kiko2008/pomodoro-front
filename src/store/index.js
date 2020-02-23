@@ -3,16 +3,12 @@ import Vuex from 'vuex'
 import users from './modules/users'
 import modals from './modules/modals'
 import tasks from './modules/tasks'
+import timer from './modules/timer'
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
-  state: {},
-  getters : {},
-  mutations: {},
-  actions : {},
-  
   modules: {
-    modals, users, tasks
+    modals, users, tasks, timer
   }
 })

@@ -5,7 +5,7 @@ const RESOURCE_LOGIN = '/login/'
 const RESOURCE_LOGOUT = '/logout/'
 
 export default {    
-    login(userName, password) {
+    login( userName, password ) {
         const body = {
             "username": userName, 
             "password": password
@@ -16,7 +16,7 @@ export default {
     logout() {
         return ApiService.post(RESOURCE_LOGOUT)
     },
-    createUser(firstName, lastName, email, userName, password) {
+    createUser( firstName, lastName, email, userName, password ) {
         const body = {
             "first_name": firstName,
             "last_name": lastName, 

@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="text-center">
       <v-col cols="12">
-        <v-card class="mx-auto mt-4 mb-4 red darken-3" max-width="700" min-height="300">
+        <v-card :class="{'mx-auto mt-4 mb-4 green accent-4': timer.breakTime, 'mx-auto mt-4 mb-4 red darken-3': !timer.breakTime}" max-width="700" min-height="300">
           <v-col>
             <v-img
               alt="Pomdoro Logo"
@@ -24,7 +24,12 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col class="font-weight-regular title" v-if="this.tasks.taskSelected">
+              <v-col class="font-weight-regular title" v-if="this.timer.numberPomodoros>0">
+                 Pomodoros consumidos: {{ this.timer.numberPomodoros }}
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col class="font-weight-regular title" v-if="this.tasks.taskSelected && !this.timer.breakTime">
                 <v-btn class="btn-timer-color" rounded bottom elevation="18" @click="endTask">
                   Finalizar tarea
                 </v-btn>  
@@ -44,70 +49,48 @@
   export default {
     name: 'PomodoroTimer',
     data: () => ({
-      defaultTime: 60 * 27,
-      time: 0,
-      timer: null
+
     }),
-    created(){
-      this.time = this.defaultTime;
-      this.playPause()
+    created() {    
+      this.initTimer()
     },
     computed: {
-      ...mapState(['users', 'tasks'])
+      ...mapState([ 'users', 'tasks', 'timer' ])
     },
     methods: {
-      ...mapMutations(['setTaskSelected', 'addEndingTask', 'dropPendingTask']),
-      ...mapActions(['persistEndTask']),
+      ...mapMutations([ 'setTaskSelected', 'addEndingTask', 'dropPendingTask', 'setNumberPomodoroUsed', 'setBreakTime', 'initTimer', 'setTaskSelected' ]),
+      ...mapActions([ 'persistTask' ]),
       endTask() {
-        this.addEndingTask(this.tasks.taskSelected)
+        let taskSelected = this.tasks.taskSelected
+        taskSelected.number_pomodoro_used = this.timer.numberPomodoros
+        this.setTaskSelected(taskSelected)
+        this.addEndingTask(taskSelected)
         this.dropPendingTask(this.tasks.taskSelected)        
-        if (this.users.user) {
+        this.setBreakTime(false)
+        if ( this.users.user ) {
           let dataUpdateTask = {
             'userName': this.users.user.username,
             'password': this.users.user.password,
             'taskId': this.tasks.taskSelected.id,
             'body': {
+              'number_pomodoro_used': this.timer.numberPomodoros,
               'end_task': true
             }
           }          
-          this.persistEndTask(dataUpdateTask)
-        }
+          this.persistTask(dataUpdateTask)
+        }       
         this.setTaskSelected(null)
+        this.initTimer()
       },
-      formatNumber(num){
-        return (num < 10 ? '0' : '') + num.toString();
+      formatNumber( num ) {
+        return (num < 10 ? '0' : '') + num.toString()
       },
-      getMinutes(){
-        return this.formatNumber(Math.floor(this.time / 60));
+      getMinutes() {
+        return this.formatNumber(Math.floor(this.timer.time / 60))
       },
-      getSeconds(){
-        return this.formatNumber(this.time % 60);
-      },
-      playPause(){
-        if(!this.timer){
-          this.play();
-        }else{
-          this.pause();
-        }
-      },
-      play(){
-        if(this.time <= 0) this.time = this.defaultTime;
-        this.timer = setInterval(() => {
-          this.time -= 1;
-          if(this.time <= 0) this.playPause();
-        }, 1000);
-      },
-      pause(){
-        clearInterval(this.timer);
-        this.timer = null;
-      },
-      reset(){
-        this.time = this.defaultTime;
-      },
-      getPlayState(){
-        return !!this.timer;
+      getSeconds() {
+        return this.formatNumber(this.timer.time % 60)
       }
-  
     }
   }
 </script>

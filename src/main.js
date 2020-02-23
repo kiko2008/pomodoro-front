@@ -8,7 +8,7 @@ import lineClamp from 'vue-line-clamp'
 
 Vue.config.productionTip = false
 
-Vue.use(Vuelidate);
+Vue.use(Vuelidate)
 
 Vue.use(lineClamp, {
   importCss: true

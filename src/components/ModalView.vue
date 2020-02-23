@@ -29,7 +29,7 @@
 
 <script>
 
-import {mapState, mapMutations} from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'ModalView',
@@ -42,20 +42,20 @@ export default {
     }
   },
   computed: {
-    ...mapState(['modals']),
+    ...mapState([ 'modals' ]),
     showModal: {
       get () {
         return this.visible
       },
       set (value) {
-        if (!value) {
+        if ( !value ) {
           this.$emit('closeModal')
         }
       }     
     }                
   },
   methods: {
-    ...mapMutations(['setModalError']),
+    ...mapMutations([ 'setModalError' ]),
     submit() {
         this.$emit('submitForm')
     }  

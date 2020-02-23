@@ -58,35 +58,35 @@
 
 <script>
 
-import {mapState, mapMutations, mapActions} from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import Home from './components/Home'
 
 export default {
   name: 'App',
 
-  components: {Home},
+  components: { Home },
   data: () => ({
   }),
   created () {
     let userSession = JSON.parse(localStorage.getItem(`pomodoro-timer-user`))
-    if (userSession) {
+    if ( userSession ) {
       this.setUser(userSession)
     }
   },
   computed: {
-    ...mapState(['modals', 'users']),
+    ...mapState( ['modals', 'users'] ),
     greeting () {
       let greeting = null
       let user = this.users.user
-      if (user) {
+      if ( user ) {
         greeting = `Bienvenido ${user.first_name} ${user.last_name}`
       }
       return greeting
     }
   },
   methods: {
-    ...mapMutations(['setShowModalLogin', 'setShowModalLogup', 'setUser']),
-    ...mapActions(['logout'])
+    ...mapMutations( ['setShowModalLogin', 'setShowModalLogup', 'setUser'] ),
+    ...mapActions( ['logout'] )
   }
-};
+}
 </script>

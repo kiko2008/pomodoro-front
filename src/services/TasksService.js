@@ -3,7 +3,7 @@ import ApiService from "./ApiService"
 const RESOURCE = '/tasks/'
 
 export default {    
-    createTask(userId, description) {
+    createTask( userId, description ) {
         const body = {
             "user": userId,
             "description": description,
@@ -15,12 +15,12 @@ export default {
         return ApiService.post(RESOURCE, body)               
     },
 
-    geListTask(idUsuario, endTask) {
+    geListTask( idUsuario, endTask ) {
         let query = `${RESOURCE}?userid=${idUsuario}&end_task=${endTask}`       
         return ApiService.get(query)
     },
     
-    updateTask(task) {
+    updateTask( task ) {
         let query = `${RESOURCE}${task.taskId}\\`
         return ApiService.patch(query, task.body)
     },

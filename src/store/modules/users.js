@@ -5,22 +5,14 @@ const state = {
     user: null
 }
 
-const getters = {
-   /*
-    GETUSER : state => {
-        return state.user
-    }
-    */
-}
-
 const mutations = {
-    setUser: (state, payload) => {
+    setUser: ( state, payload ) => {
         state.user = payload
     }
 }
 
 const actions = {
-    login: async ({commit, dispatch}, user) => {
+    login: async ( {commit, dispatch}, user ) => {
         try{
           const { data } = await UsersService.login(
             user.userName, user.password 
@@ -36,7 +28,7 @@ const actions = {
           console.log(error.response.data.msgError)   
         }
     },
-    logup: async ({commit}, user) => {
+    logup: async ( {commit}, user ) => {
         try{
             const { data } = await UsersService.createUser(
             user.firstName, user.lastName, user.email, user.userName, user.password 
@@ -50,7 +42,7 @@ const actions = {
             console.log(error.response.data.msgError)   
         }
     },
-    logout: async ({commit}) => {
+    logout: async ( {commit} ) => {
         try{
             await UsersService.logout()
             commit('setUser', null)
@@ -64,5 +56,5 @@ const actions = {
 }
 
 export default {
-  state,getters,mutations,actions
+  state, mutations, actions
 }
