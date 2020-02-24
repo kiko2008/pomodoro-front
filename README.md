@@ -37,7 +37,8 @@ Al finalizar la tarea, esta pasara a la seccion de Tareas finalizadas contabiliz
 ### Url de prueba para la web
 
 Para probar la web sin tener que levantarla en local,la he dejado levantado en una instancia Ec2. Podemos acceder a traves de la url 
-www.pomodoro.franfernandezfullstack.es
+
+http://www.pomodoro.franfernandezfullstack.es/
 
 
 ## Version
